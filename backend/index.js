@@ -14,11 +14,15 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
-app.use(
-  cors({
-    origin: "https://quicknotes-app.vercel.app/",
-  })
-);
+
+const corsOptions = {
+  origin: 'https://quicknotes-app.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send({ data: "hello" });
